@@ -9,6 +9,7 @@ plugins {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    maven("https://maven.fabricmc.net")
 }
 
 dependencies {
@@ -23,6 +24,8 @@ dependencies {
 
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+
+    implementation("net.fabricmc:mapping-io:0.3.0")
 }
 
 gradlePlugin {
