@@ -13,6 +13,10 @@ repositories {
     maven("https://maven.fabricmc.net")
 }
 
+java {
+	group = "xyz.spruceloader"
+}
+
 dependencies {
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
