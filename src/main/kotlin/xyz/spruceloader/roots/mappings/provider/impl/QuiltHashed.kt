@@ -6,7 +6,7 @@ import xyz.spruceloader.roots.mappings.provider.IntermediateMappingsProvider
 import xyz.spruceloader.roots.util.extractTinyMappings
 import java.net.URL
 
-class QuiltHashed(val build: Int) : IntermediateMappingsProvider {
+object QuiltHashed : IntermediateMappingsProvider {
 
     override fun provide(gameVersion: String): Mapper {
         val url =
