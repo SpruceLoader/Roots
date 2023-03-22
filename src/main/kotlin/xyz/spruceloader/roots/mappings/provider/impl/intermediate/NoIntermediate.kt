@@ -1,9 +1,9 @@
-package xyz.spruceloader.roots.mappings.provider.impl
+package xyz.spruceloader.roots.mappings.provider.impl.intermediate
 
 import xyz.spruceloader.roots.mappings.mapper.Mapper
 import xyz.spruceloader.roots.mappings.provider.IntermediateMappingsProvider
 
-object OfficialIntermediate : IntermediateMappingsProvider {
+object NoIntermediate : IntermediateMappingsProvider {
 
     override fun provide(gameVersion: String): Mapper = object : Mapper {}
 

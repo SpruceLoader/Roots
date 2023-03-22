@@ -1,4 +1,4 @@
-package xyz.spruceloader.roots.mappings.provider.impl
+package xyz.spruceloader.roots.mappings.provider.impl.intermediate
 
 import xyz.spruceloader.roots.mappings.mapper.Mapper
 import xyz.spruceloader.roots.mappings.mapper.impl.TinyMapper
@@ -12,7 +12,7 @@ object QuiltHashed : IntermediateMappingsProvider {
         val url =
             URL("https://maven.quiltmc.org/repository/release/org/quiltmc/hashed/$gameVersion/hashed-$gameVersion-v2.jar")
         val mappings = url.openStream().use { extractTinyMappings(it) }
-        return TinyMapper(mappings, "official", "hashed");
+        return TinyMapper(mappings, "official", "hashed")
     }
 
 }

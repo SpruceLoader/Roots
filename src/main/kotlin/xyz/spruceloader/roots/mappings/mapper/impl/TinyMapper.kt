@@ -12,18 +12,17 @@ class TinyMapper(val mappings: MappingTree, val sourceNamespace: Int, val destin
         mappings.getNamespaceId(destinationNamespace)
     )
 
-    override fun mapClass(name: String): String {
-        return mappings.getClass(name, sourceNamespace)?.getDstName(destinationNamespace) ?: name
-    }
+    override fun mapClass(name: String): String =
+        mappings.getClass(name, sourceNamespace)?.getDstName(destinationNamespace) ?: name
 
-    override fun mapField(member: Member): String {
-        return mappings.getField(member.owner, member.name, member.desc, sourceNamespace)
+    override fun mapField(member: Member): String =
+        mappings.getField(member.owner, member.name, member.desc, sourceNamespace)
             ?.getDstName(destinationNamespace) ?: member.name
-    }
 
-    override fun mapMethod(member: Member): String {
-        return mappings.getMethod(member.owner, member.name, member.desc, sourceNamespace)
+    override fun mapMethod(member: Member): String =
+        mappings.getMethod(member.owner, member.name, member.desc, sourceNamespace)
             ?.getDstName(destinationNamespace) ?: member.name
-    }
+
+    override fun reversed() = TinyMapper(mappings, destinationNamespace, sourceNamespace)
 
 }
