@@ -4,7 +4,11 @@ import net.fabricmc.mappingio.tree.MappingTree
 import xyz.spruceloader.roots.mappings.mapper.Mapper
 import xyz.spruceloader.roots.mappings.mapper.Member
 
-class TinyMapper(val mappings: MappingTree, val sourceNamespace: Int, val destinationNamespace: Int) : Mapper {
+class TinyMapper(
+    private val mappings: MappingTree,
+    private val sourceNamespace: Int,
+    private val destinationNamespace: Int
+) : Mapper {
 
     constructor(mappings: MappingTree, sourceNamespace: String, destinationNamespace: String) : this(
         mappings,
