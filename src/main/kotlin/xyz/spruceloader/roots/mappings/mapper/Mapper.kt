@@ -37,6 +37,9 @@ interface Mapper {
                 result.append(mapDesc(params[0].toString()))
             else {
                 val clazz = params.takeWhile { it != ';' } + ';'
+                if (clazz.contains(')'))
+                    throw IllegalArgumentException(desc)
+
                 result.append(mapDesc(clazz))
             }
         }
