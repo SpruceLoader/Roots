@@ -1,7 +1,6 @@
 package xyz.spruceloader.roots.mappings.provider
 
-import net.fabricmc.mappingio.tree.MappingTree
-import xyz.spruceloader.roots.mappings.Mapper
+import xyz.spruceloader.roots.mappings.mapper.Mapper
 
 interface IntermediateMappingsProvider {
 
@@ -9,6 +8,6 @@ interface IntermediateMappingsProvider {
      * Provides the intermediate mappings.
      * @return official -> intermediate
      */
-    fun provide(): Mapper
+    fun provide(gameVersion: String): Mapper
 
 }
