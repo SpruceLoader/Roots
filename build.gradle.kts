@@ -21,36 +21,36 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     // Use the Kotlin test library.
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+//    testImplementation("org.jetbrains.kotlin:kotlin-test")
 
     // Use the Kotlin JUnit integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
     implementation("net.fabricmc:mapping-io:0.3.0")
 }
 
 gradlePlugin {
     // Define the plugin
-    val greeting by plugins.creating {
-        id = "xyz.spruceloader.roots.greeting"
+    val roots by plugins.creating {
+        id = "xyz.spruceloader.roots"
         implementationClass = "xyz.spruceloader.roots.RootsPlugin"
     }
 }
 
 // Add a source set for the functional test suite
-val functionalTestSourceSet = sourceSets.create("functionalTest") {
-}
-
-gradlePlugin.testSourceSets(functionalTestSourceSet)
-configurations["functionalTestImplementation"].extendsFrom(configurations["testImplementation"])
-
-// Add a task to run the functional tests
-val functionalTest by tasks.registering(Test::class) {
-    testClassesDirs = functionalTestSourceSet.output.classesDirs
-    classpath = functionalTestSourceSet.runtimeClasspath
-}
-
-tasks.check {
-    // Run the functional tests as part of `check`
-    dependsOn(functionalTest)
-}
+//val functionalTestSourceSet = sourceSets.create("functionalTest") {
+//}
+//
+//gradlePlugin.testSourceSets(functionalTestSourceSet)
+//configurations["functionalTestImplementation"].extendsFrom(configurations["testImplementation"])
+//
+//// Add a task to run the functional tests
+//val functionalTest by tasks.registering(Test::class) {
+//    testClassesDirs = functionalTestSourceSet.output.classesDirs
+//    classpath = functionalTestSourceSet.runtimeClasspath
+//}
+//
+//tasks.check {
+//    // Run the functional tests as part of `check`
+//    dependsOn(functionalTest)
+//}
