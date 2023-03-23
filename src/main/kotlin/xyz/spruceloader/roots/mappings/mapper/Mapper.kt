@@ -32,15 +32,16 @@ interface Mapper {
         require(type.isNotEmpty())
 
         while (params.isNotEmpty()) {
-            params = params.substring(1)
-            if (params[0] != 'L')
+            if (params[0] != 'L') {
                 result.append(mapDesc(params[0].toString()))
-            else {
+                params = params.substring(1)
+            } else {
                 val clazz = params.takeWhile { it != ';' } + ';'
                 if (clazz.contains(')'))
                     throw IllegalArgumentException(desc)
 
                 result.append(mapDesc(clazz))
+                params = params.substring(clazz.length)
             }
         }
 
