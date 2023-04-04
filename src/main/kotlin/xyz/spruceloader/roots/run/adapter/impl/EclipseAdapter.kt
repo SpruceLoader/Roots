@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.util.stream.Collectors
 
-class EclipseAdapter : RunConfigAdapter {
+object EclipseAdapter : RunConfigAdapter {
 
     override fun write(project: Project, config: RunConfig) {
         val folder = project.projectDir.toPath().resolve("eclipse-runs")
@@ -45,16 +45,12 @@ class EclipseAdapter : RunConfigAdapter {
 
     override fun autoRun(project: Project): Boolean = System.getProperty("eclipse.application") != null
 
-    companion object {
-
-        fun joinArguments(arguments: Collection<String>): String {
-            return arguments.stream().map {
-                if (it.contains(' '))
-                    return@map "\"$it\""
-                it
-            }.collect(Collectors.joining(" "))
-        }
-
+    fun joinArguments(arguments: Collection<String>): String {
+        return arguments.stream().map {
+            if (it.contains(' '))
+                return@map "\"$it\""
+            it
+        }.collect(Collectors.joining(" "))
     }
 
 }

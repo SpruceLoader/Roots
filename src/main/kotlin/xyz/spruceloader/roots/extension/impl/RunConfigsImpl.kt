@@ -7,6 +7,7 @@ import xyz.spruceloader.roots.extension.RunConfigs
 import xyz.spruceloader.roots.run.RunConfig
 import xyz.spruceloader.roots.run.adapter.RunConfigAdapter
 import xyz.spruceloader.roots.run.adapter.impl.EclipseAdapter
+import xyz.spruceloader.roots.run.adapter.impl.IntelliJAdapter
 import xyz.spruceloader.roots.run.impl.RunConfigImpl
 import javax.inject.Inject
 
@@ -16,7 +17,8 @@ open class RunConfigsImpl @Inject constructor(private val project: Project) : Ru
     val runs = mutableListOf<RunConfig>()
 
     init {
-        adapters.add(EclipseAdapter())
+        adapters.add(EclipseAdapter)
+        adapters.add(IntelliJAdapter)
     }
 
     override fun create(name: String, creator: Action<RunConfig>) {
