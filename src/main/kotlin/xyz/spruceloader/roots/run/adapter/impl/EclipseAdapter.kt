@@ -7,15 +7,15 @@ import xyz.spruceloader.roots.run.adapter.RunConfigAdapter
 import xyz.spruceloader.roots.util.xmlEscapeList
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
+import java.nio.file.Path
 
 object EclipseAdapter : RunConfigAdapter {
 
-    override fun write(project: Project, config: RunConfig) {
-        val folder = project.projectDir.toPath().resolve("eclipse-runs")
-        if (!Files.isDirectory(folder))
-            Files.createDirectories(folder)
+    override fun write(project: Project, config: RunConfig, folder: Lazy<Path>) {
+        if (!Files.isDirectory(folder.value))
+            Files.createDirectories(folder.value)
         val name = project.extensions.findByType(EclipseModel::class.java)?.project?.name ?: project.name
-        val file = folder.resolve(project.name + ".launch")
+        val file = folder.value.resolve(project.name + ".launch")
 
         // from loom
         Files.newOutputStream(file).use {
