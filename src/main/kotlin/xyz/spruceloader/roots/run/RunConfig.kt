@@ -1,20 +1,19 @@
 package xyz.spruceloader.roots.run
 
-import org.gradle.api.provider.Property
-import org.gradle.api.provider.ListProperty
-import java.util.*
-
 interface RunConfig {
 
-    fun name(): String
+    fun getName(): String
 
-    fun mainClass(): Property<String>
-    fun mainClass(className: String) = mainClass().set(className)
+    fun getMainClass(): String
 
-    fun args(): ListProperty<String>
-    fun args(vararg args: String) = jvmArgs().value(listOf(args) as Iterable<String>)
+    fun mainClass(className: String)
 
-    fun jvmArgs(): ListProperty<String>
-    fun jvmArgs(vararg args: String) = jvmArgs().value(listOf(args) as Iterable<String>)
+    fun getArgs(): Array<out String>
+
+    fun args(vararg args: String)
+
+    fun getJvmArgs(): Array<out String>
+
+    fun jvmArgs(vararg args: String)
 
 }

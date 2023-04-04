@@ -9,18 +9,16 @@ import xyz.spruceloader.roots.run.RunConfig
 
 interface RootsExtension {
 
-    fun minecraft(): Property<String>
-    fun minecraft(version: String) = minecraft().set(version)
+    fun minecraft(version: String)
 
-    fun intermediate(): Property<IntermediateMappingsProvider>
-    fun intermediate(mappings: IntermediateMappingsProvider) = intermediate().set(mappings)
+    fun intermediate(mappings: IntermediateMappingsProvider)
 
-    fun mappings(): Property<MappingsProvider>		
-    fun mappings(mappings: MappingsProvider) = mappings().set(mappings)
+    fun mappings(mappings: MappingsProvider)
 
-    fun runs(): RunConfigs
+    fun getRuns(): RunConfigs
+
     fun runs(action: Action<RunConfigs>) {
-        action.execute(runs())
+        action.execute(getRuns())
     }
 
 }

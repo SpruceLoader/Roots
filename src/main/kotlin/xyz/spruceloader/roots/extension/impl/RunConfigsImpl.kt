@@ -22,8 +22,9 @@ open class RunConfigsImpl @Inject constructor(private val project: Project) : Ru
     }
 
     override fun create(name: String, creator: Action<RunConfig>) {
-        val config = RunConfigImpl(project, name)
+        val config = RunConfigImpl(name)
         creator.execute(config)
+        config.getMainClass()
         runs.add(config)
     }
 

@@ -30,10 +30,10 @@ object EclipseAdapter : RunConfigAdapter {
                     </listAttribute>
                     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
                     <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.buildship.core.classpathprovider"/>
-                    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="${config.mainClass().get()}"/>
-                    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="${joinArguments(config.args().get())}"/>
+                    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="${config.getMainClass()}"/>
+                    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="${joinArguments(config.getArgs())}"/>
                     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="$name"/>
-                    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="${joinArguments(config.jvmArgs().get())}"/>
+                    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="${joinArguments(config.getJvmArgs())}"/>
                     <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${'$'}{workspace_loc:$name}/%RUN_DIRECTORY%"/>
                     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="true"/>
                 </launchConfiguration>
@@ -45,12 +45,12 @@ object EclipseAdapter : RunConfigAdapter {
 
     override fun autoRun(project: Project): Boolean = System.getProperty("eclipse.application") != null
 
-    fun joinArguments(arguments: Collection<String>): String {
-        return arguments.stream().map {
+    fun joinArguments(arguments: Array<out String>): String {
+        return arguments.asSequence().map {
             if (it.contains(' '))
                 return@map "\"$it\""
             it
-        }.collect(Collectors.joining(" "))
+        }.joinToString(" ")
     }
 
 }

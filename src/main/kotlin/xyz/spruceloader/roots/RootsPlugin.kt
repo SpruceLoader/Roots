@@ -10,14 +10,16 @@ class RootsPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val ext = project.extensions.create("roots", RootsExtensionImpl::class.java)
-        ext.runs().let { it as RunConfigsImpl }.apply {
-            for (adapter in adapters) {
-                fun action() = runs.forEach { adapter.write(project, it) }
+        ext.runs {
+            it.let { it as RunConfigsImpl }.apply {
+                for (adapter in adapters) {
+                    fun action() = runs.forEach { run -> adapter.write(project, run) }
 
-                if (adapter.autoRun(project))
-                    action()
+                    if (adapter.autoRun(project))
+                        action()
 
-                project.tasks.create(adapter.getTaskName()) { it.doLast { action() } }
+                    project.tasks.create(adapter.getTaskName()) { task -> task.doLast { action() } }
+                }
             }
         }
     }
