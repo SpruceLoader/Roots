@@ -41,7 +41,7 @@ class EclipseAdapter : RunConfigAdapter {
         }
     }
 
-    override fun getTaskName(): String = "generateEclipseRuns"
+    override fun getTaskName(): String = "genEclipseRuns"
 
     override fun autoRun(project: Project): Boolean = System.getProperty("eclipse.application") != null
 
