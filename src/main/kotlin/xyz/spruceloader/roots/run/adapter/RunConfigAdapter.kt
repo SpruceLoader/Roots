@@ -11,4 +11,9 @@ interface RunConfigAdapter {
 	fun getTaskName(): String
 	fun autoRun(project: Project): Boolean
 
+	companion object {
+
+
+	}
+
 }

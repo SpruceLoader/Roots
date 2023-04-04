@@ -7,6 +7,14 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.util.zip.ZipInputStream
 
+fun xmlEscapeList(arguments: Array<out String>): String {
+    return arguments.asSequence().map {
+        if (it.contains(' '))
+            return@map "&quot;$it&quot;"
+        it
+    }.joinToString(" ")
+}
+
 fun extractTinyMappings(input: InputStream): MappingTree {
     val result = MemoryMappingTree()
     val zip = ZipInputStream(input)
