@@ -1,18 +1,17 @@
 package xyz.spruceloader.roots.run.impl
 
+import org.gradle.api.Project
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
-import xyz.spruceloader.roots.mappings.provider.IntermediateMappingsProvider
-import xyz.spruceloader.roots.mappings.provider.MappingsProvider
 import xyz.spruceloader.roots.run.RunConfig
 import javax.inject.Inject
 
-class RunConfigImpl(private val name: String, objectFactory: ObjectFactory) : RunConfig {
+open class RunConfigImpl @Inject constructor(project: Project, private val name: String) : RunConfig {
 
-    private val mainClass: Property<String> = objectFactory.property(String::class.java)
-    private val args: ListProperty<String> = objectFactory.listProperty(String::class.java)
-    private val jvmArgs: ListProperty<String> = objectFactory.listProperty(String::class.java)
+    private val mainClass: Property<String> = project.objects.property(String::class.java)
+    private val args: ListProperty<String> = project.objects.listProperty(String::class.java)
+    private val jvmArgs: ListProperty<String> = project.objects.listProperty(String::class.java)
 
     override fun name(): String = name
     override fun mainClass(): Property<String> = mainClass
