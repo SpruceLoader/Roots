@@ -48,7 +48,7 @@ object EclipseAdapter : RunConfigAdapter {
     fun joinArguments(arguments: Array<out String>): String {
         return arguments.asSequence().map {
             if (it.contains(' '))
-                return@map "\"$it\""
+                return@map "&quot;$it&quot;"
             it
         }.joinToString(" ")
     }
