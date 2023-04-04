@@ -12,8 +12,6 @@ import java.nio.file.Path
 object EclipseAdapter : RunConfigAdapter {
 
     override fun write(project: Project, config: RunConfig, folder: Lazy<Path>) {
-        if (!Files.isDirectory(folder.value))
-            Files.createDirectories(folder.value)
         val name = project.extensions.findByType(EclipseModel::class.java)?.project?.name ?: project.name
         val file = folder.value.resolve(project.name + ".launch")
 
