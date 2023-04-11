@@ -2,7 +2,6 @@ package xyz.spruceloader.roots.extension.impl
 
 import org.gradle.api.Action
 import org.gradle.api.Project
-import org.gradle.api.model.ObjectFactory
 import xyz.spruceloader.roots.extension.RunConfigs
 import xyz.spruceloader.roots.run.RunConfig
 import xyz.spruceloader.roots.run.adapter.RunConfigAdapter

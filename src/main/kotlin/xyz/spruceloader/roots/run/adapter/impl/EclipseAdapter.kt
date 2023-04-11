@@ -13,7 +13,7 @@ object EclipseAdapter : RunConfigAdapter {
 
     override fun write(project: Project, config: RunConfig, folder: Lazy<Path>) {
         val name = project.extensions.findByType(EclipseModel::class.java)?.project?.name ?: project.name
-        val file = folder.value.resolve(project.name + ".launch")
+        val file = folder.value.resolve(config.getName() + ".launch")
 
         // from loom
         Files.newOutputStream(file).use {
@@ -35,7 +35,7 @@ object EclipseAdapter : RunConfigAdapter {
                     <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${'$'}{workspace_loc:$name}/%RUN_DIRECTORY%"/>
                     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="true"/>
                 </launchConfiguration>
-            """.trimIndent().toByteArray(StandardCharsets.UTF_8))
+            """.trimIndent().toByteArray())
         }
     }
 
