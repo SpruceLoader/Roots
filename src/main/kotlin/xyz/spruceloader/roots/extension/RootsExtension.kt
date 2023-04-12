@@ -1,15 +1,13 @@
 package xyz.spruceloader.roots.extension
 
 import org.gradle.api.Action
-import org.gradle.api.provider.Property
-import org.gradle.api.provider.Provider
+import org.gradle.api.artifacts.Dependency
 import xyz.spruceloader.roots.mappings.provider.IntermediateMappingsProvider
 import xyz.spruceloader.roots.mappings.provider.MappingsProvider
-import xyz.spruceloader.roots.run.RunConfig
 
 interface RootsExtension {
 
-    fun minecraft(version: String)
+    fun minecraft(version: String): Dependency
 
     fun intermediate(mappings: IntermediateMappingsProvider)
 

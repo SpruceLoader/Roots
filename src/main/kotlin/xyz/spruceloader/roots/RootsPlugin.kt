@@ -3,6 +3,7 @@ package xyz.spruceloader.roots
 import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.Plugin
+import xyz.spruceloader.roots.extension.RootsExtension
 import xyz.spruceloader.roots.extension.impl.RootsExtensionImpl
 import xyz.spruceloader.roots.extension.impl.RunConfigsImpl
 import java.nio.file.Files
@@ -10,7 +11,7 @@ import java.nio.file.Files
 class RootsPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
-        val ext = project.extensions.create("roots", RootsExtensionImpl::class.java)
+        val ext = project.extensions.create(RootsExtension::class.java, "roots", RootsExtensionImpl::class.java)
         ext.runs {
             it.let { it as RunConfigsImpl }.apply {
                 val folder = lazy {
