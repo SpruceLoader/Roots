@@ -11,26 +11,23 @@ import java.nio.file.Files
 class RootsPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
-        val ext = project.extensions.create(RootsExtension::class.java, "roots", RootsExtensionImpl::class.java)
-        ext.runs {
-            it.let { it as RunConfigsImpl }.apply {
-                val folder = lazy {
-                    val path = project.projectDir.toPath().resolve("runs")
-                    if (!Files.isDirectory(path))
-                        Files.createDirectories(path)
+        val ext = project.extensions.create(RootsExtension::class.java, "roots", RootsExtensionImpl::class.java) as RootsExtensionImpl
+        val runs = ext.getRuns()
+        val folder = lazy {
+            val path = project.projectDir.toPath().resolve("runs")
+            if (!Files.isDirectory(path))
+                Files.createDirectories(path)
 
-                    path
-                }
+            path
+        }
 
-                for (adapter in adapters) {
-                    fun action() = runs.forEach { run -> adapter.write(project, run, folder) }
+        for (adapter in runs.adapters) {
+            fun action() = runs.runs.forEach { adapter.write(project, it, folder) }
 
-                    if (adapter.autoRun(project))
-                        action()
+            if (adapter.autoRun(project))
+                action()
 
-                    project.tasks.create(adapter.getTaskName()) { task -> task.doLast { action() } }
-                }
-            }
+            project.tasks.create(adapter.getTaskName()) { it.doLast { action() } }
         }
     }
 

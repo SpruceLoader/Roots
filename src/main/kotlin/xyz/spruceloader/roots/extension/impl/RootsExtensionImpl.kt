@@ -31,6 +31,6 @@ open class RootsExtensionImpl(project: Project): RootsExtension {
         this.mappings = mappings
     }
 
-    override fun getRuns(): RunConfigs = runs
+    override fun getRuns(): RunConfigsImpl = runs
 
 }
