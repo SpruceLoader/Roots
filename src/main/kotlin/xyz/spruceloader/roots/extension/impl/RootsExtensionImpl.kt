@@ -7,6 +7,7 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.internal.instantiation.InstantiatorFactory
 import org.gradle.internal.service.ServiceLookup
+import xyz.spruceloader.roots.dependency.MinecraftDependency
 import xyz.spruceloader.roots.extension.RootsExtension
 import xyz.spruceloader.roots.extension.RunConfigs
 import xyz.spruceloader.roots.mappings.provider.IntermediateMappingsProvider
@@ -20,9 +21,7 @@ open class RootsExtensionImpl(project: Project): RootsExtension {
     private var mappings: MappingsProvider? = null
     private val runs = project.objects.newInstance(RunConfigsImpl::class.java, project)
 
-    override fun minecraft(version: String): Dependency {
-        TODO("Resolve Minecraft")
-    }
+    override fun minecraft(version: String): Dependency = MinecraftDependency(version)
 
     override fun intermediate(mappings: IntermediateMappingsProvider) {
         intermediate = mappings
